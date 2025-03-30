@@ -1,8 +1,10 @@
 # Task Manager
 
-一個基於 Go 語言開發的任務管理系統，支持多種 API 接入方式。
+A task management system developed in Go, supporting multiple API integration methods.
 
-## 目錄結構
+> **Note**: This project is developed in collaboration with Cursor IDE for learning purposes, exploring best practices in Go development and software architecture.
+
+## Directory Structure
 
 ```
 .
@@ -10,75 +12,75 @@
 ├── go.mod
 ├── go.sum
 └── internal/
-    ├── domain/             # 領域模型和核心接口定義
-    │   └── task.go         # 任務相關的領域模型和接口
+    ├── domain/             # Domain models and core interface definitions
+    │   └── task.go         # Task-related domain models and interfaces
     │
-    ├── repository/         # 數據存儲層實現
-    │   └── memory/         # 內存存儲實現
+    ├── repository/         # Data storage layer implementation
+    │   └── memory/         # In-memory storage implementation
     │       └── task.go
     │
-    ├── service/           # 業務邏輯層
-    │   └── task/          # 任務服務實現
+    ├── service/           # Business logic layer
+    │   └── task/          # Task service implementation
     │       └── service.go
     │
-    └── delivery/          # API 傳輸層
-        ├── rest/          # RESTful API 實現
+    └── delivery/          # API transport layer
+        ├── rest/          # RESTful API implementation
         │   └── handler.go
         │
-        ├── graphql/       # GraphQL API 實現
+        ├── graphql/       # GraphQL API implementation
         │   └── handler.go
         │
-        └── grpc/         # gRPC API 實現
+        └── grpc/         # gRPC API implementation
             └── handler.go
 
-└── pkg/                  # 可重用的包
-    └── validator/        # 驗證器實現
-        ├── task.go       # 任務相關的驗證規則
-        └── validator.go  # 通用驗證邏輯
+└── pkg/                  # Reusable packages
+    └── validator/        # Validator implementation
+        ├── task.go       # Task-related validation rules
+        └── validator.go  # Common validation logic
 
 ```
 
-## 架構說明
+## Architecture Overview
 
-- **Domain Layer**: 定義核心業務模型和接口
-- **Repository Layer**: 實現數據持久化
-- **Service Layer**: 實現核心業務邏輯
-- **Delivery Layer**: 提供多種 API 訪問方式
+- **Domain Layer**: Defines core business models and interfaces
+- **Repository Layer**: Implements data persistence
+- **Service Layer**: Implements core business logic
+- **Delivery Layer**: Provides multiple API access methods
   - RESTful API
   - GraphQL API
   - gRPC API
 
-## 設計原則
+## Design Principles
 
-本項目遵循 SOLID 原則：
+This project follows SOLID principles:
 
-1. **單一職責原則 (SRP)**
-   - 每個包都有明確的、單一的職責
-   - 各層之間職責劃分清晰
+1. **Single Responsibility Principle (SRP)**
+   - Each package has a clear, single responsibility
+   - Clear separation of responsibilities between layers
 
-2. **開放封閉原則 (OCP)**
-   - 通過接口定義實現擴展
-   - 新增功能無需修改現有代碼
+2. **Open-Closed Principle (OCP)**
+   - Extensions implemented through interface definitions
+   - New features can be added without modifying existing code
 
-3. **里氏替換原則 (LSP)**
-   - 所有實現都可以替換其接口
-   - 確保系統的可測試性
+3. **Liskov Substitution Principle (LSP)**
+   - All implementations can substitute their interfaces
+   - Ensures system testability
 
-4. **接口隔離原則 (ISP)**
-   - 接口精簡且專注
-   - 客戶端只依賴其需要的接口
+4. **Interface Segregation Principle (ISP)**
+   - Interfaces are concise and focused
+   - Clients only depend on interfaces they need
 
-5. **依賴倒置原則 (DIP)**
-   - 高層模塊不依賴低層模塊
-   - 都依賴於抽象接口
+5. **Dependency Inversion Principle (DIP)**
+   - High-level modules don't depend on low-level modules
+   - All depend on abstract interfaces
 
-## 開發計劃
+## Development Plan
 
-- [x] 基礎架構搭建
-- [ ] 核心領域模型實現
-- [ ] 內存存儲實現
-- [ ] RESTful API 實現
-- [ ] GraphQL API 實現
-- [ ] gRPC API 實現
-- [ ] 單元測試覆蓋
-- [ ] 性能測試和優化 
+- [x] Basic infrastructure setup
+- [x] Core domain model implementation
+- [x] Storage layer implementation
+- [x] RESTful API implementation
+- [ ] GraphQL API implementation
+- [ ] gRPC API implementation
+- [ ] Unit test coverage
+- [ ] Performance testing and optimization 
