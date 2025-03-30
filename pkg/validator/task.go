@@ -1,7 +1,7 @@
 package validator
 
 import (
-	"task-manager/internal/domain"
+	"github.com/monemo12/task-manager/internal/domain"
 )
 
 // TaskValidator 實現任務的具體驗證邏輯

@@ -1,7 +1,7 @@
 package graphql
 
 import (
-	"task-manager/internal/domain"
+	"github.com/monemo12/task-manager/internal/domain"
 )
 
 // TaskResolver GraphQL 解析器

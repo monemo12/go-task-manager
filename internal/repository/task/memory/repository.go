@@ -4,8 +4,9 @@ import (
 	"context"
 	"fmt"
 	"sync"
-	"task-manager/internal/domain"
 	"time"
+
+	"github.com/monemo12/task-manager/internal/domain"
 
 	"github.com/google/uuid"
 )

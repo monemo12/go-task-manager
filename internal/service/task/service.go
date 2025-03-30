@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"task-manager/internal/domain"
+	"github.com/monemo12/task-manager/internal/domain"
 )
 
 // Service 實現 domain.TaskService 接口

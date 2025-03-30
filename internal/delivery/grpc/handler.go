@@ -1,7 +1,7 @@
 package grpc
 
 import (
-	"task-manager/internal/domain"
+	"github.com/monemo12/task-manager/internal/domain"
 )
 
 // TaskServer 實現 gRPC 服務器

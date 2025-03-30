@@ -3,11 +3,11 @@ package main
 import (
 	"log"
 
-	"task-manager/internal/delivery/rest"
-	"task-manager/internal/domain"
-	repo_task_memory "task-manager/internal/repository/task/memory"
-	service_task "task-manager/internal/service/task"
-	"task-manager/pkg/validator"
+	"github.com/monemo12/task-manager/internal/delivery/rest"
+	"github.com/monemo12/task-manager/internal/domain"
+	repo_task_memory "github.com/monemo12/task-manager/internal/repository/task/memory"
+	service_task "github.com/monemo12/task-manager/internal/service/task"
+	"github.com/monemo12/task-manager/pkg/validator"
 
 	"github.com/gin-gonic/gin"
 )
