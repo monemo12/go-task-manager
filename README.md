@@ -55,6 +55,7 @@ A task management system developed in Go, supporting multiple API integration me
 ### Component Architecture
 
 ```mermaid
+%%{init: {'theme': 'dark', 'themeVariables': { 'darkMode': true }}}%%
 graph TB
     subgraph Delivery["Delivery Layer"]
         REST["REST API Handler"]
@@ -100,9 +101,9 @@ graph TB
     TaskValidator --> ValidationRules
 
     %% Styling
-    classDef interface fill:#f0f0f0,stroke:#333,stroke-width:2px
-    classDef component fill:#fff,stroke:#333,stroke-width:2px
-    classDef layer fill:none,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
+    classDef interface fill:#2d3436,stroke:#00b894,stroke-width:2px,color:#00b894
+    classDef component fill:#2d3436,stroke:#74b9ff,stroke-width:2px,color:#74b9ff
+    classDef layer fill:none,stroke:#a8a8a8,stroke-width:2px,stroke-dasharray:5 5,color:#a8a8a8
 
     class ITaskService,ITaskRepo,ITaskValidator,ITaskNotifier,IBaseValidator interface
     class REST,GraphQL,GRPC,TaskService,MemRepo,TaskValidator,ValidationRules component
@@ -112,6 +113,7 @@ graph TB
 ### Domain Model
 
 ```mermaid
+%%{init: {'theme': 'dark', 'themeVariables': { 'darkMode': true }}}%%
 classDiagram
     class Task {
         +string ID
@@ -150,6 +152,7 @@ classDiagram
 ### Architecture Flow
 
 ```mermaid
+%%{init: {'theme': 'dark', 'themeVariables': { 'darkMode': true }}}%%
 flowchart TB
     Client --> |HTTP/gRPC| Delivery
     subgraph Internal
@@ -158,9 +161,9 @@ flowchart TB
         Repository --> |Store/Retrieve| Storage[(Storage)]
     end
     
-    style Client fill:#f9f,stroke:#333,stroke-width:2px
-    style Internal fill:#fff,stroke:#333,stroke-width:2px
-    style Storage fill:#bbf,stroke:#333,stroke-width:2px
+    style Client fill:#2d3436,stroke:#fd79a8,stroke-width:2px,color:#fd79a8
+    style Internal fill:#2d3436,stroke:#74b9ff,stroke-width:2px,color:#74b9ff
+    style Storage fill:#2d3436,stroke:#00b894,stroke-width:2px,color:#00b894
 ```
 
 ## Design Principles
