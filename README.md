@@ -50,6 +50,119 @@ A task management system developed in Go, supporting multiple API integration me
   - GraphQL API
   - gRPC API
 
+## System Design
+
+### Component Architecture
+
+```mermaid
+graph TB
+    subgraph Delivery["Delivery Layer"]
+        REST["REST API Handler"]
+        GraphQL["GraphQL Handler"]
+        GRPC["gRPC Handler"]
+    end
+
+    subgraph Service["Service Layer"]
+        TaskService["Task Service"]
+    end
+
+    subgraph Domain["Domain Layer"]
+        ITaskService["TaskService<br/><interface>"]
+        ITaskRepo["TaskRepository<br/><interface>"]
+        ITaskValidator["TaskValidator<br/><interface>"]
+        ITaskNotifier["TaskNotifier<br/><interface>"]
+    end
+
+    subgraph Repository["Repository Layer"]
+        MemRepo["Memory Repository"]
+    end
+
+    subgraph Validator["Validator Package"]
+        TaskValidator["Task Validator"]
+        IBaseValidator["BaseValidator<br/><interface>"]
+        ValidationRules["Validation Rules"]
+    end
+
+    %% Dependencies
+    REST --> ITaskService
+    GraphQL --> ITaskService
+    GRPC --> ITaskService
+
+    TaskService -.-> ITaskService
+    TaskService --> ITaskRepo
+    TaskService --> ITaskValidator
+    TaskService --> ITaskNotifier
+
+    MemRepo -.-> ITaskRepo
+
+    TaskValidator -.-> ITaskValidator
+    TaskValidator --> IBaseValidator
+    TaskValidator --> ValidationRules
+
+    %% Styling
+    classDef interface fill:#f0f0f0,stroke:#333,stroke-width:2px
+    classDef component fill:#fff,stroke:#333,stroke-width:2px
+    classDef layer fill:none,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
+
+    class ITaskService,ITaskRepo,ITaskValidator,ITaskNotifier,IBaseValidator interface
+    class REST,GraphQL,GRPC,TaskService,MemRepo,TaskValidator,ValidationRules component
+    class Delivery,Service,Domain,Repository,Validator layer
+```
+
+### Domain Model
+
+```mermaid
+classDiagram
+    class Task {
+        +string ID
+        +string Title
+        +string Description
+        +Priority Priority
+        +Status Status
+        +time.Time DueDate
+        +time.Time CreatedAt
+        +time.Time UpdatedAt
+    }
+    
+    class TaskService {
+        <<interface>>
+        +CreateTask(ctx, title, desc, priority, dueDate) Task
+        +GetTask(ctx, id) Task
+        +UpdateTaskStatus(ctx, id, status) error
+        +UpdateTaskPriority(ctx, id, priority) error
+        +DeleteTask(ctx, id) error
+        +ListTasks(ctx) []Task
+    }
+    
+    class TaskRepository {
+        <<interface>>
+        +Create(ctx, task) error
+        +GetByID(ctx, id) Task
+        +Update(ctx, task) error
+        +Delete(ctx, id) error
+        +List(ctx) []Task
+    }
+
+    TaskService ..> Task
+    TaskRepository ..> Task
+```
+
+### Architecture Flow
+
+```mermaid
+flowchart TB
+    Client --> |HTTP/gRPC| Delivery
+    subgraph Internal
+        Delivery --> |Request| Service
+        Service --> |CRUD| Repository
+        Repository --> |Store/Retrieve| Storage[(Storage)]
+    end
+    
+    style Client fill:#f9f,stroke:#333,stroke-width:2px
+    style Internal fill:#fff,stroke:#333,stroke-width:2px
+    style Storage fill:#bbf,stroke:#333,stroke-width:2px
+```
+
 ## Design Principles
 
 This project follows SOLID principles:
